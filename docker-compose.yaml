@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+    apipython:
+        build: .
+        ports:
+            - "5000:5000"
+        volumes: 
+            - ./:/home/api
