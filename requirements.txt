@@ -1,4 +1,4 @@
 gunicorn
-pickle
+pickle-mixin
 numpy
 flask
