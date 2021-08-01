@@ -3,3 +3,5 @@ pickle-mixin
 numpy
 flask
 sklearn
+joblib
+scipy
