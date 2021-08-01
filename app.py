@@ -1,6 +1,7 @@
 import pickle
 import numpy as np
 from flask import Flask, request, jsonify
+import joblib
 
 model = None
 app = Flask(__name__)
@@ -25,10 +26,17 @@ def get_prediction():
         organic_carbon = data['Organic_carbon']
         data = np.array([solids, chloramines, organic_carbon])
         data = np.array(data)[np.newaxis, :]
-        prediction = model.predict(data)
+
+        #open file
+        file = open("naive_bayes.pkl","rb")
+
+        #load trained model
+        trained_model = joblib.load(file)
+
+        prediction = trained_model.predict(data)
         return jsonify(str(prediction[0]))
 
 if __name__ == '__main__':
-    load_model()  # load model at the beginning once only
+    #load_model()  # load model at the beginning once only
     app.run(threaded=True, port=5000)
     #app.run(host='0.0.0.0', port=5000)
